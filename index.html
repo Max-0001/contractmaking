@@ -1,0 +1,293 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Interactive Service Agreement Generator</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Lora:wght@400;500;600&display=swap" rel="stylesheet">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+</head>
+<body class="p-4 sm:p-8">
+    <div id="page-1" class="page tech-bg">
+        <div class="max-w-7xl mx-auto w-full">
+            <header class="flex flex-col sm:flex-row sm:items-center sm:space-x-4 mb-10 text-center sm:text-left">
+                <img src="https://storage.googleapis.com/gemini-prod-us-west1-assets/9972323719a909a8/ChatGPT%20Image%20Aug%2028%2C%202025%2C%2004_31_15%20PM.jpg" alt="SYS INFOTECH LLC Logo" class="h-16 mx-auto sm:mx-0 mb-4 sm:mb-0">
+                <div class="flex-grow">
+                    <h1 class="text-3xl sm:text-4xl font-bold text-gray-800">SYS INFOTECH LLC</h1>
+                    <p class="text-gray-500 mt-2">Interactive Service Agreement Generator</p>
+                </div>
+            </header>
+            <div id="form-container" class="space-y-6">
+                <form id="contract-form">
+                    <div class="grid md:grid-cols-2 gap-6">
+                        <div class="form-section p-6 rounded-xl shadow-sm hover:shadow-lg transition-shadow duration-300">
+                            <h2 class="text-xl font-bold text-gray-700 border-b pb-3 mb-4">Client and Contract Details</h2>
+                            <div class="space-y-4">
+                                <div>
+                                    <label for="client-name" class="block text-sm font-medium text-gray-600 required-field">Client Name</label>
+                                    <input type="text" id="client-name" required class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500 p-2">
+                                </div>
+                                <div>
+                                    <label for="client-address" class="block text-sm font-medium text-gray-600 required-field">Client Address</label>
+                                    <input type="text" id="client-address" required class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500 p-2">
+                                </div>
+                                <div>
+                                    <label for="authorized-person" class="block text-sm font-medium text-gray-600 required-field">Authorized Person Name</label>
+                                    <input type="text" id="authorized-person" required class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500 p-2">
+                                </div>
+                                <div>
+                                    <label for="authorized-position" class="block text-sm font-medium text-gray-600 required-field">Position of Authorized Person</label>
+                                    <input type="text" id="authorized-position" required class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500 p-2">
+                                </div>
+                                <div>
+                                    <label for="contract-date" class="block text-sm font-medium text-gray-600 required-field">Contract Date</label>
+                                    <input type="date" id="contract-date" required class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500 p-2">
+                                </div>
+                                <div class="grid grid-cols-2 gap-4">
+                                    <div>
+                                        <label for="term-years" class="block text-sm font-medium text-gray-600 required-field">Term (Years)</label>
+                                        <select id="term-years" required class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500 p-2">
+                                            <option value="0" selected>0</option>
+                                            <option value="1">1</option>
+                                            <option value="2">2</option>
+                                            <option value="3">3</option>
+                                            <option value="4">4</option>
+                                            <option value="5">5</option>
+                                        </select>
+                                    </div>
+                                    <div>
+                                        <label for="term-months" class="block text-sm font-medium text-gray-600 required-field">Term (Months)</label>
+                                        <select id="term-months" required class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500 p-2">
+                                            <option value="0">0</option>
+                                            <option value="1">1</option>
+                                            <option value="2">2</option>
+                                            <option value="3">3</option>
+                                            <option value="4">4</option>
+                                            <option value="5">5</option>
+                                            <option value="6">6</option>
+                                            <option value="7">7</option>
+                                            <option value="8">8</option>
+                                            <option value="9">9</option>
+                                            <option value="10">10</option>
+                                            <option value="11">11</option>
+                                            <option value="12" selected>12</option>
+                                        </select>
+                                    </div>
+                                </div>
+                                <div>
+                                    <label for="end-date" class="block text-sm font-medium text-gray-600">End Date</label>
+                                    <input type="text" id="end-date" readonly class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500 bg-gray-100 p-2">
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="form-section p-6 rounded-xl shadow-sm hover:shadow-lg transition-shadow duration-300">
+                            <h2 class="text-xl font-bold text-gray-700 border-b pb-3 mb-4">Payment and Legal Details</h2>
+                             <div class="space-y-4">
+                                <div>
+                                    <label for="rate" class="block text-sm font-medium text-gray-600 required-field">Rate</label>
+                                    <div class="relative mt-1">
+                                        <span id="currency-symbol" class="absolute inset-y-0 left-0 pl-3 flex items-center text-gray-500 pointer-events-none"></span>
+                                        <input type="text" id="rate" required placeholder="e.g., 50 per hour or 5000 per month" class="block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500 pl-8 p-2">
+                                    </div>
+                                </div>
+                                 <div>
+                                    <label for="currency" class="block text-sm font-medium text-gray-600 required-field">Currency</label>
+                                    <select id="currency" required class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500 p-2">
+                                        <option value="USD">USD</option>
+                                        <option value="EUR">EUR</option>
+                                        <option value="AMD">AMD</option>
+                                        <option value="GBP">GBP</option>
+                                        <option value="JPY">JPY</option>
+                                        <option value="INR">INR</option>
+                                        <option value="AED">AED</option>
+                                        <option value="SAR">SAR</option>
+                                    </select>
+                                </div>
+                                <div>
+                                    <label for="jurisdiction" class="block text-sm font-medium text-gray-600 required-field">Jurisdiction</label>
+                                    <input type="text" id="jurisdiction" required class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500 p-2" placeholder="e.g., the State of California">
+                                </div>
+                                <div>
+                                    <h3 class="text-lg font-bold text-gray-700 mb-2 mt-4">Signature</h3>
+                                    <p class="text-sm font-medium text-gray-600 mb-2">Draw or upload your signature</p>
+                                    <div class="flex space-x-2">
+                                        <button type="button" id="toggle-draw-upload" class="py-2 px-4 text-sm font-medium rounded-md bg-gray-200 text-gray-700 hover:bg-gray-300 transition-colors duration-200">Upload</button>
+                                        <label for="signature-upload" class="py-2 px-4 text-sm font-medium rounded-md bg-gray-200 text-gray-700 hover:bg-gray-300 cursor-pointer transition-colors duration-200 hidden">Upload</label>
+                                        <input type="file" id="signature-upload" accept="image/*" class="hidden">
+                                    </div>
+                                    <div id="signature-container" class="mt-4">
+                                        <canvas id="signature-pad" class="w-full h-32 mt-2 border border-gray-300 rounded-md"></canvas>
+                                        <div id="signature-upload-preview" class="hidden w-full h-32 mt-2 border border-gray-300 rounded-md flex items-center justify-center bg-gray-50">
+                                            <span class="text-gray-400">Preview of uploaded signature</span>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="mt-4 pt-4 border-t border-gray-200">
+                                  <h3 class="text-lg font-bold text-gray-700 mb-2">Service Provider Details</h3>
+                                  <p class="text-sm text-gray-600">
+                                    <span class="font-semibold">"SYS INFOTECH" LLC</span><br>
+                                    Office No. 5, 4th floor, 19 Khanjyan Str., Yerevan, Armenia
+                                  </p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </form>
+                 <div class="flex flex-col sm:flex-row space-y-4 sm:space-y-0 sm:space-x-4 mt-6">
+                    <button id="reset-btn" class="w-full py-3 px-6 bg-gray-600 text-white font-semibold rounded-lg shadow-md hover:bg-gray-700 focus:outline-none focus:ring-2 focus:ring-gray-500 focus:ring-offset-2 transition duration-300 transform hover:-translate-y-1">Reset Form</button>
+                    <button id="view-contract-btn" class="w-full py-3 px-6 bg-blue-600 text-white font-semibold rounded-lg shadow-md hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 transition duration-300 transform hover:-translate-y-1">View Contract</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div id="page-2" class="page no-print tech-bg hidden">
+        <div class="max-w-xl mx-auto w-full form-section p-6 rounded-xl shadow-lg">
+            <h2 class="text-2xl font-bold text-center mb-6">Verify Your Email</h2>
+            <p class="text-center text-gray-600 mb-4">Please enter your email to receive a verification code.</p>
+            <div class="space-y-4">
+                <div>
+                    <label for="client-email" class="block text-sm font-medium text-gray-600">Client Email</label>
+                    <input type="email" id="client-email" class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500 p-2">
+                    <button type="button" id="send-code-btn" class="mt-2 py-2 px-4 text-sm font-semibold rounded-lg bg-gray-600 text-white hover:bg-gray-700 transition-colors duration-300">Send Verification Code</button>
+                </div>
+                <div id="verification-container" class="mt-4 hidden">
+                    <label for="verification-code" class="block text-sm font-medium text-gray-600">Enter Verification Code</label>
+                    <input type="text" id="verification-code" class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500 p-2 text-center text-xl tracking-widest">
+                    <p id="verification-message" class="mt-2 text-sm font-semibold"></p>
+                </div>
+                <div class="flex space-x-4">
+                    <button id="verify-btn" class="w-full py-3 px-6 bg-blue-600 text-white font-semibold rounded-lg shadow-md hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 transition duration-300" disabled>Verify Code</button>
+                    <button id="resend-code-btn" class="w-full py-3 px-6 bg-gray-600 text-white font-semibold rounded-lg shadow-md hover:bg-gray-700 focus:outline-none focus:ring-2 focus:ring-gray-500 focus:ring-offset-2 transition duration-300 hidden">Resend Code</button>
+                </div>
+                <button id="back-to-form-btn-2" class="w-full py-3 px-6 bg-gray-300 text-gray-800 font-semibold rounded-lg shadow-md hover:bg-gray-400 focus:outline-none focus:ring-2 focus:ring-gray-500 focus:ring-offset-2 transition duration-300">Back</button>
+            </div>
+        </div>
+    </div>
+    <div id="page-3" class="page no-print tech-bg hidden">
+         <div class="max-w-7xl mx-auto w-full">
+             <header class="text-center mb-10">
+                <h1 class="text-3xl sm:text-4xl font-bold text-gray-800">Contract Preview</h1>
+                <p class="text-gray-500 mt-2">Review and sign the final agreement below.</p>
+            </header>
+            <div class="bg-white p-8 rounded-xl shadow-lg border border-gray-200 print-area contract-preview">
+                <div class="flex justify-between items-center mb-6">
+                    <img src="https://storage.googleapis.com/gemini-prod-us-west1-assets/9972323719a909a8/ChatGPT%20Image%20Aug%2028%2C%202025%2C%2004_31_15%20PM.jpg" alt="SYS INFOTECH LLC Logo" class="h-12">
+                    <h2 class="text-xl font-bold">"SYS INFOTECH" LLC</h2>
+                </div>
+                <div class="flex justify-end mb-4">
+                    <label for="second-language-selector" class="mr-2 text-sm font-medium text-gray-600">Language:</label>
+                    <select id="second-language-selector" class="rounded-md border-gray-300 shadow-sm text-sm p-1">
+                        <option value="none">English</option>
+                        <option value="armenian">Armenian</option>
+                        <option value="spanish">Spanish</option>
+                        <option value="french">French</option>
+                        <option value="german">German</option>
+                        <option value="hindi">Hindi</option>
+                    </select>
+                </div>
+                <div id="contract-content" class="contract-content">
+                    <!-- English Content -->
+                    <div id="english-content">
+                    <h1 class="text-2xl font-bold text-center mb-4">SERVICES AGREEMENT</h1>
+                    <p class="text-center font-semibold">City of Yerevan</p>
+                    <p class="text-center font-semibold mb-8"><span id="preview-contract-date">August 13, 2025</span></p>
+                    <p class="mb-4">This Services Agreement is made between:</p>
+                    <p class="mb-4 font-bold"><span id="preview-client-name">[CLIENT NAME]</span><br>
+                    (hereinafter referred to as the "Client")<br>
+                    <span id="preview-client-address">[Client's Address]</span><br>
+                    represented by its <span id="preview-authorized-position">[Position]</span> <span id="preview-authorized-person">[Authorized Person Name]</span>, who acts on the basis of the charter, on the one hand,
+                    </p>
+                    <p class="mb-4">and</p>
+                    <p class="mb-8 font-bold">"SYS INFOTECH" LLC<br>
+                    Office No. 5, 4th floor, 19 Khanjyan Str., Yerevan, Armenia<br>
+                    (hereinafter referred to as the "Service Provider")<br>
+                    represented by its Director Mr. Max Keith, who acts on the basis of the charter, on the other hand.
+                    </p>
+                    
+                    <h3 class="text-xl font-bold mb-4">1. SCOPE OF SERVICES</h3>
+                    <p class="mb-4">The Service Provider shall perform the following services for the Client (the "Services"):</p>
+                    <ul class="list-disc list-inside space-y-2 mb-4">
+                        <li><b>Data Management:</b> Including but not limited to data entry, data cleaning, data storage, and ensuring data integrity.</li>
+                        <li><b>Backend Support:</b> Providing maintenance, troubleshooting, and technical support for the Client's software.</li>
+                    </ul>
+                    <p class="mb-4">The specific details of the work to be performed will be outlined in separate work orders or statements of work, which will be incorporated into this Agreement by reference.</p>
+                    
+                    <h3 class="text-xl font-bold mb-4">2. TERM OF AGREEMENT</h3>
+                    <p class="mb-4">This Agreement shall commence on <span id="preview-contract-date-2">August 13, 2025</span> and shall continue for a period of <span id="preview-contract-term">[Time Period]</span>, unless terminated earlier in accordance with the provisions of this Agreement.</p>
+                    <p class="mb-4">The end date for this agreement is <span id="preview-end-date">[End Date]</span>.</p>
+
+                    <h3 class="text-xl font-bold mb-4">3. COMPENSATION AND PAYMENT</h3>
+                    <p class="mb-2">3.1. **Invoicing:** The Service Provider shall invoice the Client on a monthly basis for the Services performed during the preceding month. The invoice will detail the work completed, hours spent, and any agreed-upon expenses.</p>
+                    <p class="mb-2">3.2. **Rate:** The rate for services will be <span id="preview-rate">[Rate]</span>.</p>
+                    <p class="mb-4">3.3. **Payment Terms:** The Client shall pay the full amount of each invoice within thirty (30) days of receipt. All payments shall be made in <span id="preview-currency">[Currency, e.g., USD]</span>.</p>
+
+                    <h3 class="text-xl font-bold mb-4">4. CONFIDENTIALITY</h3>
+                    <p class="mb-4">Both Parties agree to maintain the confidentiality of any and all proprietary or confidential information received from the other Party during the term of this Agreement. This obligation shall survive the termination of this Agreement.</p>
+
+                    <h3 class="text-xl font-bold mb-4">5. INTELLECTUAL PROPERTY</h3>
+                    <p class="mb-4">All work product, including but not limited to reports, data, and software code created by the Service Provider as part of the Services shall be the sole property of the Client upon full payment.</p>
+
+                    <h3 class="text-xl font-bold mb-4">6. TERMINATION</h3>
+                    <p class="mb-4">Either Party may terminate the agreement if a material breach is not corrected within 30 days of a written notice.</p>
+                    
+                    <h3 class="text-xl font-bold mb-4">7. INDEPENDENT CONTRACTOR RELATIONSHIP</h3>
+                    <p class="mb-4">The Service Provider is an independent contractor and nothing in this Agreement shall be construed to create an employer-employee, partnership, or joint venture relationship between the Parties.</p>
+
+                    <h3 class="text-xl font-bold mb-4">8. INDEMNIFICATION</h3>
+                    <p class="mb-4">Each Party agrees to indemnify, defend, and hold harmless the other Party from any claims, damages, or liabilities arising out of its own negligence or willful misconduct in the performance of this Agreement.</p>
+
+                    <h3 class="text-xl font-bold mb-4">9. LIMITATION OF LIABILITY</h3>
+                    <p class="mb-4">Neither Party shall be liable to the other for any indirect, incidental, or consequential damages arising from this Agreement.</p>
+
+                    <h3 class="text-xl font-bold mb-4">10. GOVERNING LAW AND DISPUTE RESOLUTION</h3>
+                    <p class="mb-4">This Agreement shall be governed by the laws of <span id="preview-jurisdiction">[Jurisdiction]</span>. Any disputes arising from this Agreement shall be resolved through good-faith negotiation. If negotiation fails, the Parties agree to pursue mediation before resorting to litigation.</p>
+
+                    <h3 class="text-xl font-bold mb-4">11. ENTIRE AGREEMENT</h3>
+                    <p class="mb-4">This Agreement, together with any referenced work orders, constitutes the entire agreement between the Parties and supersedes all prior agreements or understandings, whether written or oral.</p>
+
+                    <h3 class="text-xl font-bold mb-4 mt-8">DETAILS AND SIGNATURES OF THE PARTIES</h3>
+                    <div class="grid grid-cols-2 gap-8 mt-16">
+                        <div>
+                            <p class="font-bold">CLIENT</p>
+                            <div class="mt-4">
+                                <p class="font-semibold">Digitally Signed by: <span id="preview-sig-name"></span></p>
+                                <p class="text-sm text-gray-500"><span id="preview-sig-position"></span></p>
+                                <img id="preview-signature" class="signature-image mb-2">
+                                <p class="text-sm text-gray-500">Date: <span id="client-provider-date"></span></p>
+                                <p class="text-sm text-gray-500">Time: <span id="client-provider-time"></span></p>
+                            </div>
+                            <div class="mt-4 border-t border-gray-400 pt-2">Signature</div>
+                        </div>
+                        <div>
+                            <p class="font-bold">SERVICE PROVIDER</p>
+                            <p class="mt-4"><b>Company Name:</b> "SYS INFOTECH" LLC</p>
+                            <div class="mt-12">
+                                <p class="font-semibold">Digitally Signed by: Mr. Max Keith</p>
+                                <img src="https://storage.googleapis.com/gemini-prod-us-west1-assets/9972323719a909a8/image-removebg-preview%20(14).png" alt="Mr. Max Keith's Signature" class="max-w-[200px] h-auto">
+                                <p class="text-sm text-gray-500">Date: <span id="service-provider-date"></span></p>
+                                <p class="text-sm text-gray-500">Time: <span id="service-provider-time"></span></p>
+                            </div>
+                            <div class="mt-4 border-t border-gray-400 pt-2">Signature</div>
+                        </div>
+                    </div>
+                    </div>
+
+                    <!-- Second Language Content -->
+                    <div id="second-language-content" class="mt-8 pt-8 border-t border-gray-200"></div>
+
+                </div>
+            </div>
+            <div class="flex space-x-4 mt-6">
+                <button id="back-btn" class="w-full py-3 px-6 bg-gray-600 text-white font-semibold rounded-lg shadow-md hover:bg-gray-700 focus:outline-none focus:ring-2 focus:ring-gray-500 focus:ring-offset-2 transition duration-300">Back to Form</button>
+                <button id="pdf-btn" class="w-full py-3 px-6 bg-blue-600 text-white font-semibold rounded-lg shadow-md hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 transition duration-300">Download Contract</button>
+            </div>
+        </div>
+    </div>
+    <script src="script.js"></script>
+</body>
+</html>

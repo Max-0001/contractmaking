@@ -1,0 +1,83 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+body {
+    font-family: 'Inter', sans-serif;
+    color: #4A4A4A;
+}
+
+.contract-preview {
+    font-family: 'Lora', serif;
+}
+
+.form-section {
+    background-color: #FFFFFF;
+    border: 1px solid #EAEAEA;
+}
+
+.page {
+    min-height: 100vh;
+    padding: 2rem;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+.required-field::after {
+    content: '*';
+    color: #dc2626;
+    margin-left: 0.25rem;
+}
+
+.tech-bg {
+    background-color: #f0f8ff;
+    background-image: url('https://storage.googleapis.com/gemini-prod-us-west1-assets/9972323719a909a8/image_0d2d01.jpg');
+    background-size: cover;
+    background-position: center;
+    background-blend-mode: overlay;
+}
+
+#signature-pad {
+    border: 1px solid #EAEAEA;
+    border-radius: 8px;
+    cursor: crosshair;
+    background-color: #f7f7f7;
+}
+
+.signature-image {
+    max-width: 100%;
+    max-height: 100px;
+    display: block;
+}
+
+.contract-content {
+    font-size: 14px;
+}
+
+.hidden {
+    display: none;
+}
+
+@media print {
+    body * {
+        visibility: hidden;
+    }
+    .print-area, .print-area * {
+        visibility: visible;
+    }
+    .print-area {
+        position: absolute;
+        left: 0;
+        top: 0;
+        width: 100%;
+    }
+    .print-only { display: block; }
+    .no-print { display: none; }
+    .page {
+        page-break-after: always;
+    }
+    .page:last-child {
+        page-break-after: avoid;
+    }
+}
